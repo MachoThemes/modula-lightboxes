@@ -121,7 +121,7 @@ class Modula_Lightboxes {
 		wp_register_style( 'modula-lightbox2', MODULA_LIGHTBOXES_URL . 'assets/lightboxes/lightbox/lightbox.css', MODULA_LIGHTBOXES_VERSION, null );
 		wp_register_script( 'modula-lightbox2', MODULA_LIGHTBOXES_URL . 'assets/lightboxes/lightbox/lightbox.js', array( 'jquery' ), MODULA_LIGHTBOXES_VERSION, true );
 
-		wp_enqueue_script( 'modula-lightboxes', MODULA_LIGHTBOXES_URL . 'assets/js/modula-lightboxes.js', array( 'modula-pro' ), MODULA_LIGHTBOXES_VERSION, true );
+		wp_register_script( 'modula-lightboxes', MODULA_LIGHTBOXES_URL . 'assets/js/modula-lightboxes.js', array( 'jquery' ), MODULA_LIGHTBOXES_VERSION, true );
 	}
 
 	/**
@@ -178,31 +178,24 @@ class Modula_Lightboxes {
 			);
 
 			// We need this
-			$scripts[] = ( 'modula-lightboxes' );
+			$scripts[] = 'modula-lightboxes';
 			wp_localize_script( 'modula-lightboxes', 'wpModulaLightboxHelper', $ligtboxes_options );
 
 
-			$scripts[] = 'modula-lightboxes';
-
 			switch ( $settings['lightbox'] ) {
 				case 'lightgallery':
-					wp_enqueue_style( 'modula-lightgallery' );
 					$scripts[] = ( 'modula-lightgallery' );
 					break;
 				case 'magnific':
-					wp_enqueue_style( 'modula-magnific-popup' );
 					$scripts[] = ( 'modula-magnific-popup' );
 					break;
 				case 'prettyphoto':
-					wp_enqueue_style( 'modula-prettyphoto' );
 					$scripts[] = ( 'modula-prettyphoto' );
 					break;
 				case 'swipebox':
-					wp_enqueue_style( 'modula-swipebox' );
 					$scripts[] = ( 'modula-swipebox' );
 					break;
 				case 'lightbox2':
-					wp_enqueue_style( 'modula-lightbox2' );
 					$scripts[] = ( 'modula-lightbox2' );
 					break;
 			}

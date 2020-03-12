@@ -3,8 +3,9 @@ function modula_lightboxes_enable_lightbox( data ){
     if ( 'undefined' == typeof wpModulaLightboxHelper.lightboxes[data.options.lightbox] ) { return; }
 
     var currentLightbox = wpModulaLightboxHelper.lightboxes[data.options.lightbox];
+
     if ('magnific' == data.options.lightbox && 'function' == typeof jQuery.fn['magnificPopup']) {
-        currentLightbox['options'].delegate = "a.tile-inner[data-cyclefilter='show']";
+        currentLightbox['options'].delegate = "a.tile-inner";
         currentLightbox['options'].callbacks = {
             beforeOpen: function() {
                 jQuery(document).trigger('modula_magnific_lightbox_before_open', [event, data, this]);
@@ -44,7 +45,7 @@ function modula_lightboxes_enable_lightbox( data ){
             jQuery(document).trigger('modula_prettyphoto_lightbox_close', [ data, this ]);
         };
 
-        jQuery(data.element).find('a.tile-inner[data-cyclefilter="show"]').prettyPhoto(currentLightbox['options']);
+        jQuery(data.element).find('a.tile-inner').prettyPhoto(currentLightbox['options']);
     }  else if ('swipebox' == data.options.lightbox && 'function' == typeof jQuery.fn['swipebox']) {
         // Callbacks
         currentLightbox['options']['beforeOpen'] = function() {
@@ -63,12 +64,12 @@ function modula_lightboxes_enable_lightbox( data ){
             setTimeout( function(){ jQuery(document).trigger('modula_swipebox_lightbox_prev_slide', [ data, this ]) },500);
         };
 
-        jQuery(data.element).find('a.tile-inner[data-cyclefilter="show"]').swipebox(currentLightbox['options']);
+        jQuery(data.element).find('a.tile-inner').swipebox(currentLightbox['options']);
     } else if ('lightgallery' == data.options.lightbox && 'function' == typeof jQuery.fn['lightGallery']) {
         if ( typeof jQuery(data.element).data('lightGallery') != 'undefined' ) {
             jQuery(data.element).data('lightGallery').destroy(true);
         }
-        currentLightbox['options'].selector = "a.tile-inner[data-cyclefilter='show']";
+        currentLightbox['options'].selector = "a.tile-inner";
         jQuery(data.element).lightGallery(currentLightbox['options']);
     }
 
