@@ -1,10 +1,12 @@
 function modula_lightboxes_enable_lightbox( data ){
 
+
     if ( 'undefined' == typeof wpModulaLightboxHelper.lightboxes[data.options.lightbox] ) { return; }
 
     var currentLightbox = wpModulaLightboxHelper.lightboxes[data.options.lightbox];
 
     if ('magnific' == data.options.lightbox && 'function' == typeof jQuery.fn['magnificPopup']) {
+
         currentLightbox['options'].delegate = "a.tile-inner";
         currentLightbox['options'].callbacks = {
             beforeOpen: function() {
@@ -71,6 +73,8 @@ function modula_lightboxes_enable_lightbox( data ){
         }
         currentLightbox['options'].selector = "a.tile-inner";
         jQuery(data.element).lightGallery(currentLightbox['options']);
+    } else if('lightbox2' == data.options.lightbox && 'object' == typeof 'lightbox'){
+
     }
 
 }

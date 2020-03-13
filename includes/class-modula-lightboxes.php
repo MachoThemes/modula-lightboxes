@@ -53,6 +53,10 @@ class Modula_Lightboxes {
 
 		add_filter( 'modula_lightbox_values', array( $this, 'extra_lightboxes' ) );
 
+		add_filter( 'modula_gallery_settings', array( $this, 'modula_lightboxes_js_config' ), 20, 2 );
+
+		add_filter( 'modula_shortcode_item_data', array( $this, 'lightboxes_item_data' ), 15, 3 );
+
 	}
 
 
@@ -149,6 +153,24 @@ class Modula_Lightboxes {
 	}
 
 
+	/**
+	 * Filter the js_config. Need to add lightbox to options
+	 *
+	 * @param $js_config
+	 * @param $settings
+	 *
+	 * @return mixed
+	 */
+	public function modula_lightboxes_js_config( $js_config, $settings ) {
+
+		if ( isset( $settings['lightbox'] ) ) {
+			$js_config['lightbox'] = $settings['lightbox'];
+		}
+
+		return $js_config;
+	}
+
+
 	public function lightboxes_scripts( $scripts, $settings ) {
 
 		// If not Fancybox lets do stuff
@@ -197,6 +219,7 @@ class Modula_Lightboxes {
 					break;
 				case 'lightbox2':
 					$scripts[] = ( 'modula-lightbox2' );
+					wp_localize_script( 'modula-lightbox2', 'modulaLightboxHelper', array() );
 					break;
 			}
 
@@ -220,7 +243,7 @@ class Modula_Lightboxes {
 					$styles[] = ( 'modula-lightgallery' );
 					break;
 				case 'magnific':
-					$stylesp[] = ( 'modula-magnific-popup' );
+					$styles[] = ( 'modula-magnific-popup' );
 					break;
 				case 'prettyphoto':
 					$styles[] = ( 'modula-prettyphoto' );
@@ -241,6 +264,34 @@ class Modula_Lightboxes {
 		}
 
 		return $styles;
+	}
+
+
+	/**
+	 * Add required attributes for lightboxes
+	 *
+	 *
+	 * @param $item
+	 * @param $image
+	 * @param $settings
+	 *
+	 * @return mixed
+	 */
+	public function lightboxes_item_data( $item, $image, $settings ) {
+
+		if ( 'fancybox' != $settings['lightbox'] && isset( $item['link_attributes']['data-fancybox'] ) ) {
+			unset( $item['link_attributes']['data-fancybox'] );
+
+			if ( 'lightbox2' == $settings['lightbox'] ) {
+				$item['link_attributes']['data-lightbox'] = esc_attr( $settings['gallery_id'] );
+			} else if ( 'prettyphoto' == $settings['lightbox'] ) {
+				$item['link_attributes']['rel'] = esc_attr( 'prettyPhoto[' . $settings['gallery_id'] . ']' );
+			} else {
+				$item['link_attributes']['rel'] = esc_attr( $settings['gallery_id'] );
+			}
+		}
+
+		return $item;
 	}
 
 }
