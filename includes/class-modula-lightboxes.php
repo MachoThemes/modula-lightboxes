@@ -51,7 +51,7 @@ class Modula_Lightboxes {
 
 		add_filter( 'modula_necessary_styles', array( $this, 'lightboxes_styles' ), 999, 2 );
 
-		add_filter( 'modula_lightbox_values', array( $this, 'extra_lightboxes' ) );
+		add_filter( 'modula_lightbox_values', array( $this, 'extra_lightboxes' ),15 ,1 );
 
 		add_filter( 'modula_gallery_settings', array( $this, 'modula_lightboxes_js_config' ), 20, 2 );
 
@@ -73,9 +73,9 @@ class Modula_Lightboxes {
 	/**
 	 * Returns the singleton instance of the class.
 	 *
-	 * @since 1.0.0
-	 *
 	 * @return object The Modula_Lighboxes object.
+	 *
+	 * @since 1.0.0
 	 */
 	public static function get_instance() {
 
@@ -88,6 +88,15 @@ class Modula_Lightboxes {
 	}
 
 
+	/**
+	 * Add extra lightboxes to lightbox options
+	 *
+	 * @param $lightboxes
+	 *
+	 * @return array
+	 *
+	 * @since 1.0.0
+	 */
 	public function extra_lightboxes( $lightboxes ) {
 
 		$lightboxes = array_merge( $lightboxes, array(
@@ -101,8 +110,11 @@ class Modula_Lightboxes {
 		return $lightboxes;
 	}
 
+
 	/**
-	 * Register our lightboixes
+	 * Register our lightboxes
+	 *
+	 * @since 1.0.0
 	 */
 	public function register_lightboxes() {
 		// Register lightgallery
@@ -128,12 +140,15 @@ class Modula_Lightboxes {
 		wp_register_script( 'modula-lightboxes', MODULA_LIGHTBOXES_URL . 'assets/js/modula-lightboxes.js', array( 'jquery' ), MODULA_LIGHTBOXES_VERSION, true );
 	}
 
+
 	/**
+	 * Add Modula Lightboxes field
+	 *
 	 * @param $fields
 	 *
 	 * @return mixed
 	 *
-	 * Add Modula Lightboxes field
+	 * @since 1.0.0
 	 */
 	public function modula_lightboxes_fields( $fields ) {
 
@@ -160,6 +175,8 @@ class Modula_Lightboxes {
 	 * @param $settings
 	 *
 	 * @return mixed
+	 *
+	 * @since 1.0.0
 	 */
 	public function modula_lightboxes_js_config( $js_config, $settings ) {
 
@@ -171,6 +188,16 @@ class Modula_Lightboxes {
 	}
 
 
+	/**
+	 * Add required scripts
+	 *
+	 * @param $scripts
+	 * @param $settings
+	 *
+	 * @return array
+	 *
+	 * @since 1.0.0
+	 */
 	public function lightboxes_scripts( $scripts, $settings ) {
 
 		// If not Fancybox lets do stuff
@@ -203,6 +230,11 @@ class Modula_Lightboxes {
 			$scripts[] = 'modula-lightboxes';
 			wp_localize_script( 'modula-lightboxes', 'wpModulaLightboxHelper', $ligtboxes_options );
 
+			foreach ( $scripts as $key => $script ) {
+				if ( 'modula-fancybox' == $script ) {
+					unset( $scripts[$key] );
+				}
+			}
 
 			switch ( $settings['lightbox'] ) {
 				case 'lightgallery':
@@ -223,20 +255,32 @@ class Modula_Lightboxes {
 					break;
 			}
 
-			foreach ( $scripts as $key => $script ) {
-				if ( 'modula-fancybox' == $script ) {
-					unset( $scripts[$key] );
-				}
-			}
 		}
 
 		return $scripts;
 	}
 
+
+	/**
+	 * Add required styles
+	 *
+	 * @param $styles
+	 * @param $settings
+	 *
+	 * @return array
+	 *
+	 * @since 1.0.0
+	 */
 	public function lightboxes_styles( $styles, $settings ) {
 
 		// If not Fancybox lets do stuff
 		if ( 'fancybox' != $settings['lightbox'] ) {
+
+			foreach ( $styles as $key => $style ) {
+				if ( 'modula-fancybox' == $style ) {
+					unset( $styles[$key] );
+				}
+			}
 
 			switch ( $settings['lightbox'] ) {
 				case 'lightgallery':
@@ -256,11 +300,6 @@ class Modula_Lightboxes {
 					break;
 			}
 
-			foreach ( $styles as $key => $style ) {
-				if ( 'modula-fancybox' == $style ) {
-					unset( $styles[$key] );
-				}
-			}
 		}
 
 		return $styles;
@@ -270,12 +309,13 @@ class Modula_Lightboxes {
 	/**
 	 * Add required attributes for lightboxes
 	 *
-	 *
 	 * @param $item
 	 * @param $image
 	 * @param $settings
 	 *
 	 * @return mixed
+	 *
+	 * @since 1.0.0
 	 */
 	public function lightboxes_item_data( $item, $image, $settings ) {
 

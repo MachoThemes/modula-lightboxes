@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MODULA_LIGHTBOXES_VERSION', '1.0.' );
+define( 'MODULA_LIGHTBOXES_VERSION', '1.0.0' );
 define( 'MODULA_LIGHTBOXES_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MODULA_LIGHTBOXES_URL', plugin_dir_url( __FILE__ ) );
 define( 'MODULA_LIGHTBOXES_FILE', __FILE__ );
