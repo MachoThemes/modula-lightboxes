@@ -47,6 +47,8 @@ function modula_lightboxes_enable_lightbox( data ){
             jQuery(document).trigger('modula_prettyphoto_lightbox_close', [ data, this ]);
         };
 
+        currentLightbox['options']['deeplinking'] = false;
+
         jQuery(data.element).find('a.tile-inner').prettyPhoto(currentLightbox['options']);
     }  else if ('swipebox' == data.options.lightbox && 'function' == typeof jQuery.fn['swipebox']) {
         // Callbacks
@@ -68,6 +70,7 @@ function modula_lightboxes_enable_lightbox( data ){
 
         jQuery(data.element).find('a.tile-inner').swipebox(currentLightbox['options']);
     } else if ('lightgallery' == data.options.lightbox && 'function' == typeof jQuery.fn['lightGallery']) {
+        currentLightbox['options']['download'] = false;
         if ( typeof jQuery(data.element).data('lightGallery') != 'undefined' ) {
             jQuery(data.element).data('lightGallery').destroy(true);
         }
