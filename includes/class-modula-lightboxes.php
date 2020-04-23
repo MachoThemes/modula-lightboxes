@@ -318,8 +318,9 @@ class Modula_Lightboxes {
 	 * @since 1.0.0
 	 */
 	public function lightboxes_item_data( $item, $image, $settings ) {
+		//@todo - check why we search for data-fancybox when it is not used anymore && isset( $item['link_attributes']['data-fancybox'] )
 
-		if ( 'fancybox' != $settings['lightbox'] && isset( $item['link_attributes']['data-fancybox'] ) ) {
+		if ( 'fancybox' != $settings['lightbox']  ) {
 			unset( $item['link_attributes']['data-fancybox'] );
 
 			if ( 'lightbox2' == $settings['lightbox'] ) {
