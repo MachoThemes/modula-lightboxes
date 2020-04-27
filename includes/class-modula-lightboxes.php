@@ -44,6 +44,8 @@ class Modula_Lightboxes {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_lightboxes' ) );
 
+		add_action( 'modula_scripts_after_wp_modula', array($this,'modula_lightbox_backbone'));
+
 		// Filter Modula Lightboxes Fields
 		add_filter( 'modula_gallery_fields', array( $this, 'modula_lightboxes_fields' ) );
 
@@ -152,8 +154,15 @@ class Modula_Lightboxes {
 	 */
 	public function modula_lightboxes_fields( $fields ) {
 
-		$other_lightboxes = array(
+		$fancybox_notice = array(
+		"use-fancybox" => array (
+			"name"        => '',
+			"type"        => "content",
+			"content"     => esc_html__( 'Did you consider using Fancybox ? It features more options such as title, caption, keyboard navigation and many more .', 'modula-lighboxes'),
+			"priority"    => 5,
+		));
 
+		$other_lightboxes = array(
 			"fancybox"     => esc_html__( 'Fancybox', 'modula-lightboxes' ),
 			"swipebox"     => esc_html__( 'Swipebox', 'modula-lightboxes' ),
 			"magnific"     => esc_html__( 'Magnific Gallery', 'modula-lightboxes' ),
@@ -162,6 +171,7 @@ class Modula_Lightboxes {
 			"prettyphoto"  => esc_html__( 'PrettyPhoto', 'modula-lightboxes' ),
 		);
 
+		$fields['lightboxes'] = wp_parse_args( $fancybox_notice, $fields['lightboxes'] );
 		$fields['lightboxes']['lightbox']['values'] = wp_parse_args( $other_lightboxes, $fields['lightboxes']['lightbox']['values'] );
 
 		return $fields;
@@ -186,7 +196,19 @@ class Modula_Lightboxes {
 
 		return $js_config;
 	}
+	/**
+	 * Add lightbox conditio
+	 */
+	public function modula_lightbox_backbone() {
+		$screen = get_current_screen();
 
+		// Check if is modula custom post type
+		if ('modula-gallery' !== $screen->post_type) {
+			return;
+		}
+
+		wp_enqueue_script( 'modula-lightbox-conditions', MODULA_LIGHTBOXES_URL . 'assets/js/wp-modula-lightboxes-conditions.js', array( 'jquery' ), MODULA_LIGHTBOXES_VERSION, true );
+	}
 
 	/**
 	 * Add required scripts
