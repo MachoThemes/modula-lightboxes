@@ -59,6 +59,8 @@ class Modula_Lightboxes {
 
 		add_filter( 'modula_shortcode_item_data', array( $this, 'lightboxes_item_data' ), 15, 3 );
 
+		add_filter( 'modula_disable_lightboxes', '__return_false' );
+
 	}
 
 
