@@ -144,40 +144,140 @@ class Modula_Lightboxes {
 		wp_register_script( 'modula-lightboxes', MODULA_LIGHTBOXES_URL . 'assets/js/modula-lightboxes.js', array( 'jquery' ), MODULA_LIGHTBOXES_VERSION, true );
 	}
 
+  /**
+    * Add Modula Lightboxes field
+    *
+    * @param $fields
+    *
+    * @return mixed
+    *
+    * @since 1.0.0
+	*/
+    public function modula_lightboxes_fields( $fields ) {
 
-	/**
-	 * Add Modula Lightboxes field
-	 *
-	 * @param $fields
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.0.0
-	 */
-	public function modula_lightboxes_fields( $fields ) {
+        $fancybox_notice = array(
+        "use-fancybox" => array (
+            "name"        => '',
+            "type"        => "content",
+            "content"     => __( Modula_Lightboxes::fancybox_features(), 'modula-lighboxes'),
+            "priority"    => 5,
+        ));
 
-		$fancybox_notice = array(
-		"use-fancybox" => array (
-			"name"        => '',
-			"type"        => "content",
-			"content"     => esc_html__( 'Did you consider using Fancybox ? It features more options such as title, caption, keyboard navigation and many more .', 'modula-lighboxes'),
-			"priority"    => 5,
-		));
+        $other_lightboxes = array(
+            "fancybox"     => esc_html__( 'Fancybox', 'modula-lightboxes' ),
+            "swipebox"     => esc_html__( 'Swipebox', 'modula-lightboxes' ),
+            "magnific"     => esc_html__( 'Magnific Gallery', 'modula-lightboxes' ),
+            "lightgallery" => esc_html__( 'LightGallery', 'modula-lightboxes' ),
+            "lightbox2"    => esc_html__( 'Lightbox', 'modula-lightboxes' ),
+            "prettyphoto"  => esc_html__( 'PrettyPhoto', 'modula-lightboxes' ),
+        );
 
-		$other_lightboxes = array(
-			"fancybox"     => esc_html__( 'Fancybox', 'modula-lightboxes' ),
-			"swipebox"     => esc_html__( 'Swipebox', 'modula-lightboxes' ),
-			"magnific"     => esc_html__( 'Magnific Gallery', 'modula-lightboxes' ),
-			"lightgallery" => esc_html__( 'LightGallery', 'modula-lightboxes' ),
-			"lightbox2"    => esc_html__( 'Lightbox', 'modula-lightboxes' ),
-			"prettyphoto"  => esc_html__( 'PrettyPhoto', 'modula-lightboxes' ),
-		);
+        $fields['lightboxes'] = wp_parse_args( $fancybox_notice, $fields['lightboxes'] );
+        $fields['lightboxes']['lightbox']['values'] = wp_parse_args( $other_lightboxes, $fields['lightboxes']['lightbox']['values'] );
 
-		$fields['lightboxes'] = wp_parse_args( $fancybox_notice, $fields['lightboxes'] );
-		$fields['lightboxes']['lightbox']['values'] = wp_parse_args( $other_lightboxes, $fields['lightboxes']['lightbox']['values'] );
+        return $fields;
+    }
 
-		return $fields;
-	}
+    /**
+     * Display fancybox features 
+     * 
+     * @return $html
+     */
+    public static function fancybox_features() {
+
+        $featuresTooltips = array(
+            array(
+                'tooltip' => 'Enable this to allow loop navigation inside lightbox',
+                'feature' => 'Loop Navigation',
+            ),
+            array(
+                'tooltip' => 'Toggle on to show the navigation arrows',
+                'feature' => 'Navigation Arrows',
+            ),
+            array(
+                'tooltip' => 'Toggle on to show the image title in the lightbox above the caption.',
+                'feature' => 'Show Image Title',
+            ),
+            array(
+                'tooltip' => 'Toggle on to show the image caption in the lightbox.',
+                'feature' => 'Show Image Caption',
+            ),
+            array(
+                'tooltip' => 'Select the position of the caption and title inside the lightbox.',
+                'feature' => 'Title and Caption Position',
+            ),
+            array(
+                'tooltip' => 'Enable or disable keyboard/mousewheel navigation inside lightbox',
+                'feature' => 'Keyboard/mousewheel Navigation',
+            ),
+            array(
+                'tooltip' => 'Display the toolbar which contains the action buttons on top right corner.',
+                'feature' => 'Toolbar',
+            ),
+            array(
+                'tooltip' => 'Close the slide if user clicks/double clicks on slide( not image ).',
+                'feature' => ' Close on slide click / double click',
+            ),
+            array(
+                'tooltip' => 'Display the counter at the top left corner.',
+                'feature' => 'Infobar',
+            ),
+            array(
+                'tooltip' => 'Open the lightbox automatically in Full Screen mode.',
+                'feature' => 'Auto start in Fullscreen',
+            ),
+            array(
+                'tooltip' => 'Place the thumbnails at the bottom of the lightbox. This will automatically put `y` axis for thumbnails.',
+                'feature' => 'Thumbnails at bottom ',
+            ),
+            array(
+                'tooltip' => 'Select vertical or horizontal scrolling for thumbnails',
+                'feature' => 'Thumb axis',
+            ),
+            array(
+                'tooltip' => 'Display thumbnails on lightbox opening.',
+                'feature' => 'Auto start thumbnail ',
+            ),
+            array(
+                'tooltip' => 'Choose the lightbox transition effect between slides.',
+                'feature' => 'Transition Effect ',
+            ),
+            array(
+                'tooltip' => 'Allow panning/swiping',
+                'feature' => 'Allow Swiping ',
+            ),
+            array(
+                'tooltip' => 'Toggle ON to show all images',
+                'feature' => 'Show all images ',
+            ),
+            array(
+                'tooltip' => 'Choose the open/close animation effect of the lightbox',
+                'feature' => 'Open/Close animation' ,
+            ),
+            array(
+                'tooltip' => 'Set the lightbox background color',
+                'feature' => 'Lightbox background color',
+            ));
+
+        $html2 = 'Did you consider using Fancybox ? It features more options such as :';
+
+        $html2 .= '<ul class="modula-lightbox-features">';
+        foreach( $featuresTooltips as $key => $value ) {
+
+            $html2 .= '<li>';
+            $html2 .= '<div class="modula-tooltip"><span>[?]</span>';
+            $html2 .= '<div class="modula-tooltip-content">' . esc_html__( $featuresTooltips[$key]['tooltip']) . '</div>';
+            $html2 .= '</div>';
+            $html2 .= "<p>" . esc_html__($featuresTooltips[$key]['feature']) . "</p>";
+            $html2 .= '</li>';
+            
+        }
+        $html2 .= '</ul>';
+
+        $html2 .= '<p><strong> Since Modula v2.3.0 Fancybox is the only officially supported lightbox. </strong> </p>';
+
+        return $html2 ;
+    }
 
 
 	/**
@@ -210,6 +310,7 @@ class Modula_Lightboxes {
 		}
 
 		wp_enqueue_script( 'modula-lightbox-conditions', MODULA_LIGHTBOXES_URL . 'assets/js/wp-modula-lightboxes-conditions.js', array( 'jquery' ), MODULA_LIGHTBOXES_VERSION, true );
+		wp_enqueue_style( 'modula-lightbox-css', MODULA_LIGHTBOXES_URL . 'assets/css/lightbox-admin.css', MODULA_LIGHTBOXES_VERSION );
 	}
 
 	/**
