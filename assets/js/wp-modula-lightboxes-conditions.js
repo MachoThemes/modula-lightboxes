@@ -1,7 +1,7 @@
 (function( Modula ){
     "use strict"
-    console.log( wp.Modula)
-var modulaLightboxesConditions = Backbone.Model.extend({
+
+	var modulaLightboxesConditions = Backbone.Model.extend({
 
     initialize: function( args ){
 

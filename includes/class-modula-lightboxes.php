@@ -159,7 +159,7 @@ class Modula_Lightboxes {
         "use-fancybox" => array (
             "name"        => '',
             "type"        => "content",
-            "content"     => __( Modula_Lightboxes::fancybox_features(), 'modula-lighboxes'),
+            "content"     => $this->fancybox_features(),
             "priority"    => 5,
         ));
 
@@ -183,100 +183,100 @@ class Modula_Lightboxes {
      * 
      * @return $html
      */
-    public static function fancybox_features() {
+    public function fancybox_features() {
 
         $featuresTooltips = array(
             array(
-                'tooltip' => 'Enable this to allow loop navigation inside lightbox',
-                'feature' => 'Loop Navigation',
+                'tooltip' => esc_html__('Enable this to allow loop navigation inside lightbox','modula-lightboxes'),
+                'feature' => esc_html__('Loop Navigation','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Toggle on to show the navigation arrows',
-                'feature' => 'Navigation Arrows',
+                'tooltip' => esc_html__('Toggle on to show the navigation arrows','modula-lightboxes'),
+                'feature' => esc_html__('Navigation Arrows','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Toggle on to show the image title in the lightbox above the caption.',
-                'feature' => 'Show Image Title',
+                'tooltip' => esc_html__('Toggle on to show the image title in the lightbox above the caption.','modula-lightboxes'),
+                'feature' => esc_html__('Show Image Title','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Toggle on to show the image caption in the lightbox.',
-                'feature' => 'Show Image Caption',
+                'tooltip' => esc_html__('Toggle on to show the image caption in the lightbox.','modula-lightboxes'),
+                'feature' => esc_html__('Show Image Caption','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Select the position of the caption and title inside the lightbox.',
-                'feature' => 'Title and Caption Position',
+                'tooltip' => esc_html__('Select the position of the caption and title inside the lightbox.','modula-lightboxes'),
+                'feature' => esc_html__('Title and Caption Position','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Enable or disable keyboard/mousewheel navigation inside lightbox',
-                'feature' => 'Keyboard/mousewheel Navigation',
+                'tooltip' => esc_html__('Enable or disable keyboard/mousewheel navigation inside lightbox','modula-lightboxes'),
+                'feature' => esc_html__('Keyboard/mousewheel Navigation','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Display the toolbar which contains the action buttons on top right corner.',
-                'feature' => 'Toolbar',
+                'tooltip' => esc_html__('Display the toolbar which contains the action buttons on top right corner.','modula-lightboxes'),
+                'feature' => esc_html__('Toolbar','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Close the slide if user clicks/double clicks on slide( not image ).',
-                'feature' => ' Close on slide click / double click',
+                'tooltip' => esc_html__('Close the slide if user clicks/double clicks on slide( not image ).','modula-lightboxes'),
+                'feature' => esc_html__(' Close on slide click / double click','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Display the counter at the top left corner.',
-                'feature' => 'Infobar',
+                'tooltip' => esc_html__('Display the counter at the top left corner.','modula-lightboxes'),
+                'feature' => esc_html__('Infobar','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Open the lightbox automatically in Full Screen mode.',
-                'feature' => 'Auto start in Fullscreen',
+                'tooltip' => esc_html__('Open the lightbox automatically in Full Screen mode.','modula-lightboxes'),
+                'feature' => esc_html__('Auto start in Fullscreen','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Place the thumbnails at the bottom of the lightbox. This will automatically put `y` axis for thumbnails.',
-                'feature' => 'Thumbnails at bottom ',
+                'tooltip' => esc_html__('Place the thumbnails at the bottom of the lightbox. This will automatically put `y` axis for thumbnails.','modula-lightboxes'),
+                'feature' => esc_html__('Thumbnails at bottom ','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Select vertical or horizontal scrolling for thumbnails',
-                'feature' => 'Thumb axis',
+                'tooltip' => esc_html__('Select vertical or horizontal scrolling for thumbnails','modula-lightboxes'),
+                'feature' => esc_html__('Thumb axis','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Display thumbnails on lightbox opening.',
-                'feature' => 'Auto start thumbnail ',
+                'tooltip' => esc_html__('Display thumbnails on lightbox opening.','modula-lightboxes'),
+                'feature' => esc_html__('Auto start thumbnail ','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Choose the lightbox transition effect between slides.',
-                'feature' => 'Transition Effect ',
+                'tooltip' => esc_html__('Choose the lightbox transition effect between slides.','modula-lightboxes'),
+                'feature' => esc_html__('Transition Effect ','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Allow panning/swiping',
-                'feature' => 'Allow Swiping ',
+                'tooltip' => esc_html__('Allow panning/swiping','modula-lightboxes'),
+                'feature' => esc_html__('Allow Swiping ','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Toggle ON to show all images',
-                'feature' => 'Show all images ',
+                'tooltip' => esc_html__('Toggle ON to show all images','modula-lightboxes'),
+                'feature' => esc_html__('Show all images ','modula-lightboxes'),
             ),
             array(
-                'tooltip' => 'Choose the open/close animation effect of the lightbox',
-                'feature' => 'Open/Close animation' ,
+                'tooltip' => esc_html__('Choose the open/close animation effect of the lightbox','modula-lightboxes'),
+                'feature' => esc_html__('Open/Close animation','modula-lightboxes') ,
             ),
             array(
-                'tooltip' => 'Set the lightbox background color',
-                'feature' => 'Lightbox background color',
+                'tooltip' => esc_html__('Set the lightbox background color','modula-lightboxes'),
+                'feature' => esc_html__('Lightbox background color','modula-lightboxes'),
             ));
 
-        $html2 = 'Did you consider using Fancybox ? It features more options such as :';
+        $html = esc_html__('Did you consider using Fancybox ? It features more options such as :','modula-lightboxes');
 
-        $html2 .= '<ul class="modula-lightbox-features">';
-        foreach( $featuresTooltips as $key => $value ) {
+        $html .= '<ul class="modula-lightbox-features">';
+        foreach( $featuresTooltips as $feature ) {
 
-            $html2 .= '<li>';
-            $html2 .= '<div class="modula-tooltip"><span>[?]</span>';
-            $html2 .= '<div class="modula-tooltip-content">' . esc_html__( $featuresTooltips[$key]['tooltip']) . '</div>';
-            $html2 .= '</div>';
-            $html2 .= "<p>" . esc_html__($featuresTooltips[$key]['feature']) . "</p>";
-            $html2 .= '</li>';
+            $html .= '<li>';
+            $html .= '<div class="modula-tooltip"><span>[?]</span>';
+            $html .= '<div class="modula-tooltip-content">' . esc_html( $feature['tooltip']) . '</div>';
+            $html .= '</div>';
+            $html .= "<p>" . esc_html($feature['feature']) . "</p>";
+            $html .= '</li>';
             
         }
-        $html2 .= '</ul>';
+        $html .= '</ul>';
 
-        $html2 .= '<p><strong> Since Modula v2.3.0 Fancybox is the only officially supported lightbox. </strong> </p>';
+        $html .= '<p><strong> '.esc_html__('Since Modula v2.3.0 Fancybox is the only officially supported lightbox.','modula-lightboxes').' </strong> </p>';
 
-        return $html2 ;
+        return $html ;
     }
 
 
@@ -299,15 +299,9 @@ class Modula_Lightboxes {
 		return $js_config;
 	}
 	/**
-	 * Add lightbox conditio
+	 * Add lightbox conditions
 	 */
 	public function modula_lightbox_backbone() {
-		$screen = get_current_screen();
-
-		// Check if is modula custom post type
-		if ('modula-gallery' !== $screen->post_type) {
-			return;
-		}
 
 		wp_enqueue_script( 'modula-lightbox-conditions', MODULA_LIGHTBOXES_URL . 'assets/js/wp-modula-lightboxes-conditions.js', array( 'jquery' ), MODULA_LIGHTBOXES_VERSION, true );
 		wp_enqueue_style( 'modula-lightbox-css', MODULA_LIGHTBOXES_URL . 'assets/css/lightbox-admin.css', MODULA_LIGHTBOXES_VERSION );
