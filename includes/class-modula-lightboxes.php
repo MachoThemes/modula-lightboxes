@@ -155,13 +155,13 @@ class Modula_Lightboxes {
 	*/
     public function modula_lightboxes_fields( $fields ) {
 
-        $fancybox_notice = array(
-        "use-fancybox" => array (
-            "name"        => '',
-            "type"        => "content",
-            "content"     => $this->fancybox_features(),
-            "priority"    => 5,
-        ));
+        // $fancybox_notice = array(
+        // "use-fancybox" => array (
+        //     "name"        => '',
+        //     "type"        => "content",
+        //     "content"     => $this->fancybox_features(),
+        //     "priority"    => 5,
+        // ));
 
         $other_lightboxes = array(
             "fancybox"     => esc_html__( 'Fancybox', 'modula-lightboxes' ),
