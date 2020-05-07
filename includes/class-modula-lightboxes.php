@@ -164,7 +164,6 @@ class Modula_Lightboxes {
         // ));
 
         $other_lightboxes = array(
-            "fancybox"     => esc_html__( 'Fancybox', 'modula-lightboxes' ),
             "swipebox"     => esc_html__( 'Swipebox', 'modula-lightboxes' ),
             "magnific"     => esc_html__( 'Magnific Gallery', 'modula-lightboxes' ),
             "lightgallery" => esc_html__( 'LightGallery', 'modula-lightboxes' ),
@@ -172,8 +171,11 @@ class Modula_Lightboxes {
             "prettyphoto"  => esc_html__( 'PrettyPhoto', 'modula-lightboxes' ),
         );
 
-        $fields['lightboxes'] = wp_parse_args( $fancybox_notice, $fields['lightboxes'] );
-        $fields['lightboxes']['lightbox']['values'] = wp_parse_args( $other_lightboxes, $fields['lightboxes']['lightbox']['values'] );
+        $fields['lightboxes']['lightbox']['values'] = array_merge( $fields['lightboxes']['lightbox']['values'], $other_lightboxes );
+
+        if ( isset( $fields['lightboxes']['lightbox']['values']['fancybox'] ) ) {
+        	$fields['lightboxes']['lightbox']['values']['fancybox'] = esc_html__( 'Fancybox', 'modula-lightboxes' );
+        }
 
         return $fields;
     }
